@@ -1,7 +1,9 @@
 #!/bin/bash
 
 IMAGE_NAME=ghcr.io/amslabtech/realsense_ros
+if [ -z "$CONTAINER_NAME" ]; then
 CONTAINER_NAME=realsense_ros
+fi
 
 TAG_NAME=latest
 if [ "$(uname -m)" == "aarch64" ]; then
