@@ -34,7 +34,10 @@ echo "ROS_MASTER_URI=${ROS_MASTER_URI}"
 echo "ROS_IP=${ROS_IP}"
 echo "LAUNCH=${LAUNCH}"
 
-docker run -it \
+# docker stop ${CONTAINER_NAME}
+# docker rm ${CONTAINER_NAME}
+
+docker run \
     --privileged \
     --volume="/dev:/dev" \
     --env ROS_MASTER_URI=${ROS_MASTER_URI} \
@@ -43,4 +46,4 @@ docker run -it \
     --restart=always \
     --name ${CONTAINER_NAME} \
     ${IMAGE_NAME}:${TAG_NAME} \
-    bash -c "roslaunch realsense2_camera ${LAUNCH}"
+    bash -c "roslaunch realsense2_camera ${LAUNCH}" &
