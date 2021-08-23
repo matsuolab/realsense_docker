@@ -14,7 +14,7 @@ HSRB_IP=`avahi-resolve -4 --name ${HSRB_HOSTNAME} | cut -f 2`
 ROS_MASTER_URI="http://${HSRB_IP}:11311"
 ROS_IP=`hostname -I | cut -d' ' -f1`
 #LAUNCH=rs_camera.launch
-LAUNCH="rs_camera.launch camera:=hand_camera align_depth:=true respawn:=true"
+LAUNCH="rs_camera.launch camera:=hand_camera align_depth:=true respawn:=true depth_width:=640 depth_height:=480 color_width:=640 color_height:=480 depth_fps:=30 color_fps:=30"
 
 #if [ ! $# -eq 0 ]; then
 #    IP_CHECK=$(echo $1 | egrep "^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
@@ -36,6 +36,13 @@ echo "LAUNCH=${LAUNCH}"
 
 # docker stop ${CONTAINER_NAME}
 # docker rm ${CONTAINER_NAME}
+
+if [ ! "$(docker ps -q -f name=${CONTAINER_NAME})" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=${CONTAINER_NAME})" ]; then
+        # cleanup
+        docker rm ${CONTAINER_NAME}
+    fi
+fi
 
 docker run \
     --privileged \
