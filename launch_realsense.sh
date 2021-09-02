@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME=ghcr.io/amslabtech/realsense_ros
+IMAGE_NAME=ghcr.io/matsuolab/realsense_ros
 CONTAINER_NAME=realsense_ros
 
 TAG_NAME=latest
