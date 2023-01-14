@@ -36,7 +36,6 @@ docker run -it --rm \
     --env ROS_MASTER_URI=${ROS_MASTER_URI} \
     --env ROS_IP=${ROS_IP} \
     --net="host" \
-    --restart=always \
     --name ${CONTAINER_NAME} \
     ${IMAGE_NAME}:${TAG_NAME} \
     bash -c "roslaunch realsense2_camera ${LAUNCH}"
